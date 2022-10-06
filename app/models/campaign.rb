@@ -1,4 +1,4 @@
 class Campaign < ApplicationRecord
-  # assosciation
+  # association
   belongs_to :url
 end

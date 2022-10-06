@@ -3,9 +3,6 @@ class UrlsController < ApplicationController
   before_action :find_url, only: [:show, :edit, :update, :destroy]
   
   require 'uri'
-  require "zlib"
-  require 'securerandom'
-
 
   def new
     @url = current_user.urls.new

@@ -1,24 +1,5 @@
-# README
+# Pointer 短網址
+# Feature
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+*   帶入 UTM 參數，輕鬆追蹤流量來源
+*   簡化網址長度，放入貼文實用又簡單
