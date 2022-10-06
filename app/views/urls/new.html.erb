@@ -1,0 +1,13 @@
+<h1>新增網址</h1>
+
+<%= form_with model: @url do |url_form| %>
+  <li>網址：<%= url_form.text_field :page %></li>
+  <%= fields_for :campaign, @url.campaign do |campaign_form| %>
+    <li>source：<%= campaign_form.text_field :source %></li>
+    <li>medium：<%= campaign_form.text_field :medium %></li>
+    <li>campaign：<%= campaign_form.text_field :name %></li>
+    <li>term：<%= campaign_form.text_field :term %></li>
+    <li>content：<%= campaign_form.text_field :content %></li>
+  <% end %>
+  <%= url_form.submit '新增' %>
+<% end %>
