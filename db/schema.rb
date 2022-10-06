@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_03_032502) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_06_054730) do
+  create_table "campaigns", force: :cascade do |t|
+    t.string "source"
+    t.string "medium"
+    t.string "name"
+    t.string "term"
+    t.string "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "url_id"
+    t.index ["url_id"], name: "index_campaigns_on_url_id"
+  end
+
   create_table "sites", force: :cascade do |t|
     t.text "url"
     t.string "shortener"
@@ -18,6 +30,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_03_032502) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_sites_on_user_id"
+  end
+
+  create_table "urls", force: :cascade do |t|
+    t.text "page"
+    t.string "shortener"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_urls_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -33,4 +54,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_03_032502) do
   end
 
   add_foreign_key "sites", "users"
+  add_foreign_key "urls", "users"
 end
