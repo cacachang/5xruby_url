@@ -4,5 +4,6 @@ class HomeController < ApplicationController
 
   def index
     @urls = Url.all
+    @env = ENV['DOMAIN']
   end
 end

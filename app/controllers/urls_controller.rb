@@ -1,8 +1,11 @@
 class UrlsController < ApplicationController
   before_action :authenticate_user!
   before_action :find_url, only: [:show, :edit, :update, :destroy]
-
+  
   require 'uri'
+  require "zlib"
+  require 'securerandom'
+
 
   def new
     @url = current_user.urls.new
@@ -14,6 +17,7 @@ class UrlsController < ApplicationController
     @campaign = @url.build_campaign(campaign_params)
     utm_query()
 
+
     if @url.save || @campaign.save
       redirect_to '/', notice: "新增成功"
     else
@@ -22,7 +26,7 @@ class UrlsController < ApplicationController
   end
 
   def show
-    redirect_to @url.page, allow_other_host: true
+    redirect_to @url.utm_url, allow_other_host: true
   end
 
   def edit
@@ -37,6 +41,7 @@ class UrlsController < ApplicationController
   end
 
   def destroy
+    @campaign = @url.campaign
     @url.destroy
     @campaign.destroy
 

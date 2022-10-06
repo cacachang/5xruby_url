@@ -6,18 +6,18 @@
 
 <table>
   <tr>
-    <td>網址</td>
     <td>短網址</td>
-    <td>url網址</td>
+    <td>網址</td>
     <td>編輯</td>
     <td>刪除</td>
   </tr>
 
   <% @urls.each do |url| %>
     <tr>
-      <td><%= url.page %></td>
-      <td><%= link_to url.shortener, url_path(url.id) %></td>
+      <td><%= link_to "#{@env}/reurl/#{url.shortener}", url_path(url.id) %></td>
       <td><%= url.utm_url %></td>
+      <td><%= link_to '編輯', edit_url_path(url.id) %></td>
+      <td><%= link_to '刪除', url_path(url.id), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }  %></td>
     </tr>
   <% end %>
 </table>

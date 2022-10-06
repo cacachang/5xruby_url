@@ -1,4 +1,4 @@
-<h1>新增網址</h1>
+<h1>編輯網址</h1>
 
 <% if @url.errors.any? %>
   <% @url.errors.full_messages.each do |message| %>
@@ -15,5 +15,5 @@
     <li>term：<%= campaign_form.text_field :term %></li>
     <li>content：<%= campaign_form.text_field :content %></li>
   <% end %>
-  <%= url_form.submit '新增' %>
+  <%= url_form.submit '更新' %>
 <% end %>
