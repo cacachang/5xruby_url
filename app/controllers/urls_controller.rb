@@ -1,8 +1,6 @@
 class UrlsController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_url, only: [:show, :edit, :update, :destroy]
-  
-  require 'uri'
+  before_action :find_url, only: %i[show edit update destroy]
 
   def new
     @url = current_user.urls.new
@@ -11,29 +9,31 @@ class UrlsController < ApplicationController
 
   def create
     @url = current_user.urls.new(url_params)
-    @campaign = @url.build_campaign(campaign_params)
-    utm_query()
+    @campaign = @url.create_campaign(campaign_params)
+    utm_query
 
-
-    if @url.save || @campaign.save
-      redirect_to '/', notice: "新增成功"
+    if @url.save
+      redirect_to '/', notice: '新增成功'
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
   def show
-    redirect_to @url.utm_url, allow_other_host: true
+    redirect_to @url.utm_url
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
-    if @url.save || @campaign.save
-      redirect_to '/', notice: "編輯成功"
+    @campaign = @url.campaign
+    @campaign.update(campaign_params)
+    utm_query
+
+    if @url.update(url_params)
+      redirect_to '/', notice: '編輯成功'
     else
-      render :new
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -46,6 +46,7 @@ class UrlsController < ApplicationController
   end
 
   private
+
   def url_params
     params.require(:url).permit(:page)
   end
@@ -59,13 +60,13 @@ class UrlsController < ApplicationController
   end
 
   def utm_query
-    utm_source = @campaign.source != "" && "utm_source=#{@campaign.source}"
-    utm_medium = @campaign.medium != "" && "utm_medium=#{@campaign.medium}"
-    utm_campaign = @campaign.name != "" && "utm_campaign=#{@campaign.name}"
-    utm_term = @campaign.term != "" && "utm_term=#{@campaign.term}"
-    utm_content = @campaign.content != "" && "utm_content=#{@campaign.content}"
-   
-    utm =[utm_source, utm_medium, utm_campaign, utm_term, utm_content].select{|utm| utm != false }.join("&")
+    utm_source = @campaign.source != '' && "utm_source=#{@campaign.source}"
+    utm_medium = @campaign.medium != '' && "utm_medium=#{@campaign.medium}"
+    utm_campaign = @campaign.name != '' && "utm_campaign=#{@campaign.name}"
+    utm_term = @campaign.term != '' && "utm_term=#{@campaign.term}"
+    utm_content = @campaign.content != '' && "utm_content=#{@campaign.content}"
+
+    utm = [utm_source, utm_medium, utm_campaign, utm_term, utm_content].select { |utm| utm != false }.join('&')
 
     uri = URI.parse(@url[:page])
     new_query_ary = URI.decode_www_form(utm)

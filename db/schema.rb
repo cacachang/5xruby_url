@@ -10,50 +10,50 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_06_074535) do
-  create_table "campaigns", force: :cascade do |t|
-    t.string "source"
-    t.string "medium"
-    t.string "name"
-    t.string "term"
-    t.string "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "url_id"
-    t.index ["url_id"], name: "index_campaigns_on_url_id"
+ActiveRecord::Schema[7.0].define(version: 20_221_006_074_535) do
+  create_table 'campaigns', force: :cascade do |t|
+    t.string 'source'
+    t.string 'medium'
+    t.string 'name'
+    t.string 'term'
+    t.string 'content'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.integer 'url_id'
+    t.index ['url_id'], name: 'index_campaigns_on_url_id'
   end
 
-  create_table "sites", force: :cascade do |t|
-    t.text "url"
-    t.string "shortener"
-    t.integer "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_sites_on_user_id"
+  create_table 'sites', force: :cascade do |t|
+    t.text 'url'
+    t.string 'shortener'
+    t.integer 'user_id', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['user_id'], name: 'index_sites_on_user_id'
   end
 
-  create_table "urls", force: :cascade do |t|
-    t.text "page"
-    t.string "shortener"
-    t.integer "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.text "utm_url"
-    t.index ["user_id"], name: "index_urls_on_user_id"
+  create_table 'urls', force: :cascade do |t|
+    t.text 'page'
+    t.string 'shortener'
+    t.integer 'user_id', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.string 'utm_url'
+    t.index ['user_id'], name: 'index_urls_on_user_id'
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  create_table 'users', force: :cascade do |t|
+    t.string 'email', default: '', null: false
+    t.string 'encrypted_password', default: '', null: false
+    t.string 'reset_password_token'
+    t.datetime 'reset_password_sent_at'
+    t.datetime 'remember_created_at'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['email'], name: 'index_users_on_email', unique: true
+    t.index ['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true
   end
 
-  add_foreign_key "sites", "users"
-  add_foreign_key "urls", "users"
+  add_foreign_key 'sites', 'users'
+  add_foreign_key 'urls', 'users'
 end
