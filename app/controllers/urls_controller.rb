@@ -9,10 +9,10 @@ class UrlsController < ApplicationController
 
   def create
     @url = current_user.urls.new(url_params)
-    @campaign = @url.create_campaign(campaign_params)
+    @campaign = @url.build_campaign(campaign_params)
     utm_query
 
-    if @url.save
+    if @url.save && @campaign.save
       redirect_to '/', notice: '新增成功'
     else
       render :new, status: :unprocessable_entity
@@ -20,7 +20,8 @@ class UrlsController < ApplicationController
   end
 
   def show
-    redirect_to @url.utm_url
+    @url.click_logs.create if @url
+    redirect_to @url.utm_url, allow_other_host: true
   end
 
   def edit; end
