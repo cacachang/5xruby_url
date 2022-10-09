@@ -4,22 +4,37 @@
 
 <%= link_to '新增短網址', new_url_path %>
 
-<table>
-  <tr>
-    <td>短網址</td>
-    <td>網址</td>
-    <td>編輯</td>
-    <td>刪除</td>
-    <td>點擊次數</td>
-  </tr>
+<%= form_with(url: root_path, method: :get, data: {turbo_frame: "search"}) do |form| %>
 
-  <% @urls.each do |url| %>
+  <%= form.label :query, "網址搜尋", class: "block mb-2" %>
+    <div class="flex space-x-3">
+    <%= form.text_field :query, class: "py-3 px-4 rounded border ring-0 focus:ring-4 focus:ring-orange-100 focus:shadow-none focus:border-orange-500 focus:outline-none" %>
+
+    <%= form.submit '送出', class: "px-4 py-3 font-medium bg-orange-300 text-neutal-900 rounded flex items-center cursor-pointer hover:bg-orange-400 focus:ring-4 ring-0 focus:ring-orange-100" %>
+  </div>
+<% end %>
+
+<div id="search">
+  <table>
     <tr>
-      <td><%= link_to "#{@env}/reurl/#{url.shortener}", url_path(url.id), target: "_blank" %></td>
-      <td><%= url.utm_url %></td>
-      <td><%= link_to '編輯', edit_url_path(url.id) %></td>
-      <td><%= link_to '刪除', url_path(url.id), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }  %></td>
-      <td><%= url.click_logs.size %></td>
+      <td>短網址</td>
+      <td>網址</td>
+      <td>編輯</td>
+      <td>刪除</td>
+      <td>點擊次數</td>
     </tr>
+    <% @search.each do |url| %>
+      <tr>
+        <td><%= link_to "#{@env}/reurl/#{url.shortener}", url_path(url.id), target: "_blank" %></td>
+        <td><%= url.utm_url %></td>
+        <td><%= link_to '編輯', edit_url_path(url.id) %></td>
+        <td><%= link_to '刪除', url_path(url.id), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }  %></td>
+        <td><%= url.click_logs.size %></td>
+      </tr>
   <% end %>
-</table>
+  </table>
+</div>
+
+
+
+
