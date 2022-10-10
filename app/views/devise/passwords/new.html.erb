@@ -13,11 +13,11 @@
 
         <%= render "devise/shared/error_messages", resource: resource %>
 
-        <button class="flex items-center w-full px-4 mt-8 transition-all border border-gray-300 rounded-md h-9 ">
+        <button class="flex items-center w-full px-4 mt-8 transition-all border border-gray-300 rounded-md h-9 font-medium bg-red-200 cursor-pointer hover:bg-red-300 focus:ring-4 ring-0 focus:ring-red-100 mb-6">
             <%= f.submit "發送密碼重置電子郵件", class:"text-sm text-white mx-auto bg-transparent" %>
         </button>
         
-        <div class="flex justify-center mt-6">
+        <div class="flex justify-center mt-6 ">
             <%= link_to "登入", new_user_session_path, class:"link-hover text-sm text-gray-500 text-sm"%>
             <span class="mx-2 text-sm text-gray-500 ">或</span>
             <%= link_to "註冊", new_user_registration_path, class:"link-hover text-sm text-gray-500 text-sm"%>

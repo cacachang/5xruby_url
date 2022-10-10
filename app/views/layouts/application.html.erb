@@ -12,11 +12,21 @@
   </head>
 
   <body>
-    <% if current_user %>
-      <%= render 'layouts/user_sign_in' %>
-      <%= yield %>
-    <% else %>
-      <%= yield %>
-    <% end %>
+    <div>
+      <% if notice %>
+        <p class="text-xl font-bold ml-4 mt-4 text-center"><%= notice %></p>
+      <% end %>
+      <% if alert %>
+        <p class="text-xl font-bold ml-4 mt-4 text-center"><%= alert %></p>
+      <% end %>
+    </div>
+    <header>
+      <% if user_signed_in? %>
+        <%= render 'layouts/user_sign_in' %>
+        <%= yield %>
+      <% else %>
+        <%= yield %>
+      <% end %>
+    </header>
   </body>
 </html>

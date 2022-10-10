@@ -16,7 +16,7 @@ module Users
 
     # DELETE /resource/sign_out
     def destroy
-      redirect_to '/users/sign_in'
+      super
     end
 
     # protected
