@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_08_153329) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_10_051938) do
   create_table "campaigns", force: :cascade do |t|
     t.string "source"
     t.string "medium"
@@ -20,6 +20,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_08_153329) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "url_id"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_campaigns_on_deleted_at"
     t.index ["url_id"], name: "index_campaigns_on_url_id"
   end
 
@@ -48,6 +50,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_08_153329) do
     t.string "utm_url"
     t.integer "click", default: 0
     t.integer "click_logs_count"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_urls_on_deleted_at"
     t.index ["user_id"], name: "index_urls_on_user_id"
   end
 

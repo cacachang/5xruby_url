@@ -40,8 +40,8 @@ class UrlsController < ApplicationController
 
   def destroy
     @campaign = @url.campaign
-    @url.destroy
-    @campaign.destroy
+    @url.update(deleted_at: Time.now)
+    @campaign.update(deleted_at: Time.now)
 
     redirect_to '/', notice: '刪除成功'
   end
