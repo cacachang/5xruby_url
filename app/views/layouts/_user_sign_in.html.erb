@@ -1,6 +1,14 @@
 <% if user_signed_in? %>
-  <%= link_to '登出', destroy_user_session_path, data: { "turbo-method": :delete } %>
+  <div class="m-4 w-12 px-2 py-2 font-medium rounded flex items-center cursor-pointer hover:bg-red-300 focus:ring-4 ring-0 focus:ring-red-100 m-auto">
+    <%= link_to '登出', destroy_user_session_path, data: { "turbo-method": :delete } %>
+  </div>
 <% else %>
-  <%= link_to '註冊', new_user_registration_path %>
-  <%= link_to '登入', new_user_session_path %>
+  <div class="flex">
+    <div class="m-4 w-12 px-2 py-2 font-medium rounded flex items-center cursor-pointer hover:bg-red-300 focus:ring-4 ring-0 focus:ring-red-100 m-auto">
+      <%= link_to '註冊', new_user_registration_path %>
+    </div>
+    <div class="m-4 w-12 px-2 py-2 font-medium rounded flex items-center cursor-pointer hover:bg-red-300 focus:ring-4 ring-0 focus:ring-red-100 m-auto">
+      <%= link_to '登入', new_user_session_path %>
+    </div>
+  </div>
 <% end %>

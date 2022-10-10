@@ -1,52 +1,60 @@
-<h1>Welcome to Pointer</h1>
+<h1 class="text-3xl font-bold text-center mb-16 mt-16">Welcome to Pointer</h1>
 
-<%= notice %>
+<div class="text-xl font-bold mb-16 mt-16 ml-4 text-center">
+  <%= notice %>
+</div>
 
-<%= link_to '新增短網址', new_url_path %>
 
-<%= form_with(url: root_path, method: :get, data: {turbo_frame: "search"}) do |form| %>
+<div class="flex space-x-96">
+  <%= link_to '新增短網址', new_url_path, class: "w-32 px-4 py-3 font-medium bg-red-200 rounded flex items-center cursor-pointer hover:bg-red-300 focus:ring-4 ring-0 focus:ring-red-100 mb-6 ml-2" %>
 
-  <div class="flex space-x-3">
-    <%= form.label :query, "網址搜尋", class: "block mb-2" %>
+  <%= form_with(url: root_path, method: :get, data: {turbo_frame: "search"}) do |form| %>
 
-    <%= form.text_field :query, class: "py-3 px-4 rounded border ring-0 focus:ring-4 focus:ring-orange-100 focus:shadow-none focus:border-orange-500 focus:outline-none" %>
+    <div class="flex space-x-3">
+      <%= form.label :query, "網址搜尋", class: "block m-auto" %>
 
-    <%= form.submit '送出', class: "px-4 py-3 font-medium bg-orange-300 text-neutal-900 rounded flex items-center cursor-pointer hover:bg-orange-400 focus:ring-4 ring-0 focus:ring-orange-100" %>
-  </div>
-<% end %>
+      <%= form.text_field :query, class: "w-80 py-3 px-4 rounded border ring-0 focus:ring-4 focus:ring-red-100 focus:shadow-none focus:border-orange-500 focus:outline-none" %>
+
+      <%= form.submit '送出', class: "px-4 py-3 font-medium bg-red-200 rounded flex items-center cursor-pointer hover:bg-red-300 focus:ring-4 ring-0 focus:ring-red-100" %>
+    </div>
+  <% end %>
+</div>
 
 <div id="search">
-  <table>
-    <tr>
-      <td>短網址</td>
-      <td>網址</td>
-      <td>編輯</td>
-      <td>刪除</td>
-      <td>點擊次數</td>
-      <td>標籤</td>
-
-    </tr>
+  <table class="border ml-2 mr-2">
+    <thead>
+      <tr>
+        <td class="w-3/12 p-2 text-center">短網址</td>
+        <td class="w-5/12 p-2 text-center">網址</td>
+        <td class="w-1/12 p-2"></td>
+        <td class="w-1/12 p-2"></td>
+        <td class="w-1/12 p-2 text-center">點擊次數</td>
+        <td class="w-1/12 p-2 text-center">標籤</td>
+      </tr>
+    </thead>
+    <tbody>
       <% @search.each do |url| %>
-        <tr>
-          <td data-controller="copy-url">
-            <button data-action="click->copy-url">複製</button>
-            <%= link_to "#{@env}/reurl/#{url.shortener}", url_path(url.id), target: "_blank", data: { target: "copy-url.page"} %>
+        <tr class="border text-center">
+          <td data-controller="copy-url" class="p-2">
+            <%= link_to "#{@env}/reurl/#{url.shortener}", url_path(url.id), target: "_blank", data: { target: "copy-url.page"}, class: "block mb-6" %>
+            <button data-action="click->copy-url" class="w-18 px-4 py-3 font-medium bg-red-200 text-neutal-900 rounded flex items-center cursor-pointer hover:bg-red-300 focus:ring-4 ring-0 focus:ring-red-100 m-auto">複製</button>
           </td>
-          <td><%= url.utm_url %></td>
-          <td><%= link_to '編輯', edit_url_path(url.id) %></td>
-          <td><%= link_to '刪除', url_path(url.id), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }  %></td>
-          <td><%= url.click_logs.size %></td>
-          <td>
+          <td class="p-2"><%= url.utm_url %></td>
+          <td class="p-2"><%= link_to '編輯', edit_url_path(url.id), class: "w-16 px-4 py-3 font-medium bg-red-200 rounded flex items-center cursor-pointer hover:bg-red-300 focus:ring-4 ring-0 focus:ring-red-100"%></td>
+          <td class="p-2"><%= link_to '刪除', url_path(url.id), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "w-16 px-4 py-3 font-medium bg-red-200 rounded flex items-center cursor-pointer hover:bg-red-300 focus:ring-4 ring-0 focus:ring-red-100"%></td>
+          <td class="p-2 text-center"><%= url.click_logs.size %></td>
+          <td class="p-2 text-center">
             <% if url.tag.present? %>
               <%= url.tag.tag.tr(' ',',') %>
-              <%= link_to '修改標籤', edit_url_tags_path(url.id) %>
-              <%= link_to '刪除標籤', url_tags_path(url.id), data: { turbo_method: :delete } %>
+              <%= link_to '修改標籤', edit_url_tags_path(url.id), class: "w-24 px-4 py-3 font-medium bg-red-200 rounded flex items-center cursor-pointer hover:bg-red-300 focus:ring-4 ring-0 focus:ring-red-100 mb-4 mt-4"%>
+              <%= link_to '刪除標籤', url_tags_path(url.id), data: { turbo_method: :delete }, class: "w-24 px-4 py-3 font-medium bg-red-200 rounded flex items-center cursor-pointer hover:bg-red-300 focus:ring-4 ring-0 focus:ring-red-100 mb-4" %>
             <% else %>
-              <%= link_to '新增標籤', new_url_tags_path(url.id) %>
+              <%= link_to '新增標籤', new_url_tags_path(url.id), class: "w-24 px-4 py-3 font-medium bg-red-200 rounded flex items-center cursor-pointer hover:bg-red-300 focus:ring-4 ring-0 focus:ring-red-100 mb-6 "%>
             <% end %>
           </td>
         </tr>
       <% end %>
+    </tbody>
   </table>
 </div>
 
