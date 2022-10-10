@@ -4,9 +4,10 @@ class HomeController < ApplicationController
   def index
     @env = ENV.fetch('DOMAIN', 'localhost:3000')
     if params[:query].present?
-      @search = Url.where("page LIKE ?", "%#{params[:query]}%") 
+      @search = current_user.urls.where("page LIKE ?", "%#{params[:query]}%")
     else
-      @search = Url.all
+      @search = current_user.urls
     end
+    
   end
 end

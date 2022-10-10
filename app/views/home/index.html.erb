@@ -23,7 +23,8 @@
       <td>編輯</td>
       <td>刪除</td>
       <td>點擊次數</td>
-      
+      <td>標籤</td>
+
     </tr>
       <% @search.each do |url| %>
         <tr>
@@ -35,6 +36,15 @@
           <td><%= link_to '編輯', edit_url_path(url.id) %></td>
           <td><%= link_to '刪除', url_path(url.id), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }  %></td>
           <td><%= url.click_logs.size %></td>
+          <td>
+            <% if url.tag.present? %>
+              <%= url.tag.tag.tr(' ',',') %>
+              <%= link_to '修改標籤', edit_url_tags_path(url.id) %>
+              <%= link_to '刪除標籤', url_tags_path(url.id), data: { turbo_method: :delete } %>
+            <% else %>
+              <%= link_to '新增標籤', new_url_tags_path(url.id) %>
+            <% end %>
+          </td>
         </tr>
       <% end %>
   </table>

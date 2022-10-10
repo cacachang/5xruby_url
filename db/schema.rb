@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_10_051938) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_10_071253) do
   create_table "campaigns", force: :cascade do |t|
     t.string "source"
     t.string "medium"
@@ -41,6 +41,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_10_051938) do
     t.index ["user_id"], name: "index_sites_on_user_id"
   end
 
+  create_table "tags", force: :cascade do |t|
+    t.text "tag"
+    t.integer "url_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["url_id"], name: "index_tags_on_url_id"
+  end
+
   create_table "urls", force: :cascade do |t|
     t.text "page"
     t.string "shortener"
@@ -69,5 +77,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_10_051938) do
 
   add_foreign_key "click_logs", "urls"
   add_foreign_key "sites", "users"
+  add_foreign_key "tags", "urls"
   add_foreign_key "urls", "users"
 end

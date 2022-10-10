@@ -4,6 +4,7 @@ class Url < ApplicationRecord
   belongs_to :user
   has_one :campaign
   has_many :click_logs, dependent: :destroy
+  has_one :tag
 
   # validation
   validates :page, presence: :true

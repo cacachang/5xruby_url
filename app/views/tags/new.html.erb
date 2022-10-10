@@ -1,0 +1,15 @@
+<h1>新增標籤</h1>
+
+<% if @tag.errors.any? %>
+  <% @tag.errors.full_messages.each do |message| %>
+    <h2><%= message %></h2>
+  <% end %>
+<% end %>
+
+<%= form_with model: @tag, url: url_tags_path, method: "post" do |tag_form| %>
+  <li>
+    標籤：(請使用空格隔開)
+    <%= tag_form.text_field :tag %>
+  </li>
+  <%= tag_form.submit '新增' %>
+<% end %>
