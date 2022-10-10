@@ -1,0 +1,21 @@
+<h1 class="text-3xl font-bold mb-16 mt-16 ml-4">新增網址</h1>
+
+<% if @url.errors.any? %>
+  <% @url.errors.full_messages.each do |message| %>
+    <h2 class="text-xl font-bold mb-16 mt-16 ml-4"><%= message %></h2>
+  <% end %>
+<% end %>
+
+<div class="w-1/4 ml-4">
+  <%= form_with model: @url do |url_form| %>
+  <li class="text-base">網址：<%= url_form.text_field :page, class: "w-80 py-3 px-4 rounded border ring-0 focus:ring-4 focus:ring-red-100 focus:shadow-none focus:border-orange-500 focus:outline-none mb-4" %></li>
+    <%= fields_for :campaign, @url.campaign do |campaign_form| %>
+      <li class="text-base">source：<%= campaign_form.text_field :source, class: "w-80 py-3 px-4 rounded border ring-0 focus:ring-4 focus:ring-red-100 focus:shadow-none focus:border-orange-500 focus:outline-none mb-4" %></li>
+      <li class="text-base">medium：<%= campaign_form.text_field :medium, class: "w-80 py-3 px-4 rounded border ring-0 focus:ring-4 focus:ring-red-100 focus:shadow-none focus:border-orange-500 focus:outline-none mb-4" %></li>
+      <li class="text-base">campaign：<%= campaign_form.text_field :name, class: "w-80 py-3 px-4 rounded border ring-0 focus:ring-4 focus:ring-red-100 focus:shadow-none focus:border-orange-500 focus:outline-none mb-4" %></li>
+      <li class="text-base">term：<%= campaign_form.text_field :term, class: "w-80 py-3 px-4 rounded border ring-0 focus:ring-4 focus:ring-red-100 focus:shadow-none focus:border-orange-500 focus:outline-none mb-4" %></li>
+      <li class="text-base">content：<%= campaign_form.text_field :content, class: "w-80 py-3 px-4 rounded border ring-0 focus:ring-4 focus:ring-red-100 focus:shadow-none focus:border-orange-500 focus:outline-none mb-4" %></li>
+    <% end %>
+    <%= url_form.submit '新增', class: "w-16 px-4 py-3 font-medium bg-red-200 text-neutal-900 rounded flex items-center cursor-pointer hover:bg-red-300 focus:ring-4 ring-0 focus:ring-red-100 m-auto" %>
+  <% end %>
+</div>
