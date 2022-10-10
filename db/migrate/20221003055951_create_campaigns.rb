@@ -8,7 +8,6 @@ class CreateCampaigns < ActiveRecord::Migration[7.0]
       t.string :name
       t.string :term
       t.string :content
-      t.references :site, null: false, foreign_key: true
 
       t.timestamps
     end
