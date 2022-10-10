@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UrlsController < ApplicationController
   before_action :authenticate_user!
   before_action :find_url, only: %i[show edit update destroy]
@@ -20,7 +22,7 @@ class UrlsController < ApplicationController
   end
 
   def show
-    @url.click_logs.create if @url
+    @url&.click_logs&.create
     redirect_to @url.utm_url, allow_other_host: true
   end
 
@@ -67,7 +69,7 @@ class UrlsController < ApplicationController
     utm_term = @campaign.term != '' && "utm_term=#{@campaign.term}"
     utm_content = @campaign.content != '' && "utm_content=#{@campaign.content}"
 
-    utm = [utm_source, utm_medium, utm_campaign, utm_term, utm_content].select { |utm| utm != false }.join('&')
+    utm = [utm_source, utm_medium, utm_campaign, utm_term, utm_content].reject { |utm| utm == false }.join('&')
 
     uri = URI.parse(@url[:page])
     new_query_ary = URI.decode_www_form(utm)

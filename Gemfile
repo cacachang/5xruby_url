@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -49,7 +51,7 @@ gem 'bootsnap', require: false
 
 gem 'devise'
 
-gem "tailwindcss-rails", "~> 2.0"
+gem 'tailwindcss-rails', '~> 2.0'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -76,5 +78,3 @@ group :test do
   gem 'selenium-webdriver'
   gem 'webdrivers'
 end
-
-

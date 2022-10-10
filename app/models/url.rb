@@ -1,5 +1,6 @@
-class Url < ApplicationRecord
+# frozen_string_literal: true
 
+class Url < ApplicationRecord
   # association
   belongs_to :user
   has_one :campaign
@@ -7,7 +8,7 @@ class Url < ApplicationRecord
   has_one :tag
 
   # validation
-  validates :page, presence: :true
+  validates :page, presence: true
 
   after_create :encode_id
 
@@ -16,6 +17,6 @@ class Url < ApplicationRecord
   private
 
   def encode_id
-    update(shortener: "#{SecureRandom.hex(4)}")
+    update(shortener: SecureRandom.hex(4).to_s)
   end
 end
