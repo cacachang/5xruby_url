@@ -21,7 +21,7 @@ class TagsController < ApplicationController
   def edit; end
 
   def update
-    if @tag.update(tag_params)
+    if @url.tag.update(tag_params)
       redirect_to root_path, notice: '修改成功'
     else
       render :edit, status: :unprocessable_entity

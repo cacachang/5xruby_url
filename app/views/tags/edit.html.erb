@@ -7,7 +7,7 @@
 <% end %>
 
 <div class="w-1/3 ml-4 flex">
-  <%= form_with model: @tag, url: url_tags_path, method: "post" do |tag_form| %>
+  <%= form_with model: @tag, url: url_tags_path, data: { turbo: false }, method: "patch" do |tag_form| %>
     <li>
       標籤：(請使用空格隔開)
       <%= tag_form.text_field :tag, class: "w-80 py-3 px-4 rounded border ring-0 focus:ring-4 focus:ring-red-100 focus:shadow-none focus:border-orange-500 focus:outline-none mb-4 ml-2" %>

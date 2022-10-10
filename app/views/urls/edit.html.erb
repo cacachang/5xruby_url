@@ -7,7 +7,7 @@
 <% end %>
 
 <div class="w-1/4 ml-4">
-  <%= form_with model: @url do |url_form| %>
+  <%= form_with model: @url, data: { turbo: false } do |url_form| %>
   <li class="text-base">網址：<%= url_form.text_field :page, class: "w-80 py-3 px-4 rounded border ring-0 focus:ring-4 focus:ring-red-100 focus:shadow-none focus:border-orange-500 focus:outline-none mb-4" %></li>
     <%= fields_for :campaign, @url.campaign do |campaign_form| %>
       <li class="text-base">source：<%= campaign_form.text_field :source, class: "w-80 py-3 px-4 rounded border ring-0 focus:ring-4 focus:ring-red-100 focus:shadow-none focus:border-orange-500 focus:outline-none mb-4" %></li>
