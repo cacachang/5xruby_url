@@ -1,0 +1,19 @@
+<h1>編輯網址</h1>
+
+<% if @url.errors.any? %>
+  <% @url.errors.full_messages.each do |message| %>
+    <h2><%= message %></h2>
+  <% end %>
+<% end %>
+
+<%= form_with model: @url do |url_form| %>
+  <li>網址：<%= url_form.text_field :page %></li>
+  <%= fields_for :campaign, @url.campaign do |campaign_form| %>
+    <li>source：<%= campaign_form.text_field :source %></li>
+    <li>medium：<%= campaign_form.text_field :medium %></li>
+    <li>campaign：<%= campaign_form.text_field :name %></li>
+    <li>term：<%= campaign_form.text_field :term %></li>
+    <li>content：<%= campaign_form.text_field :content %></li>
+  <% end %>
+  <%= url_form.submit '更新' %>
+<% end %>

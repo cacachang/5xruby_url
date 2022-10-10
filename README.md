@@ -1,24 +1,11 @@
-# README
+# Pointer 短網址
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+使用 Rails 7 開發
+## 建立方式
+1. git clone git@github.com:cacachang/5xruby_url.git
+2. bundle install
+3. rails db:migrate
+## 功能特色
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+*   帶入 UTM 參數，輕鬆追蹤流量來源
+*   簡化網址長度，放入貼文實用又簡單
