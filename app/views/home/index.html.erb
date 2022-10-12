@@ -31,7 +31,7 @@
       <% @search.each do |url| %>
         <tr class="border text-center">
           <td data-controller="copy-url" class="p-2">
-            <%= link_to "#{@env}/reurl/#{url.shortener}", url_path(url.id), target: "_blank", data: { target: "copy-url.page" }, class: "block mb-6" %>
+            <%= link_to "#{@env}/reurl/#{url.shortener}", url_path(url.shortener), target: "_blank", data: { target: "copy-url.page" }, class: "block mb-6" %>
             <button data-action="click->copy-url#copyToClipboard" class="w-18 px-4 py-3 font-medium bg-red-200 text-neutal-900 rounded flex items-center cursor-pointer hover:bg-red-300 focus:ring-4 ring-0 focus:ring-red-100 m-auto">複製</button>
           </td>
           <td class="p-2"><%= url.utm_url %></td>
