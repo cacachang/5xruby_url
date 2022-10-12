@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class UrlsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :find_url, only: %i[show edit update destroy]
+  before_action :authenticate_user!, except: %i[show]
+  before_action :find_url, only: %i[edit update destroy]
 
   def new
     @url = current_user.urls.new
@@ -22,8 +22,9 @@ class UrlsController < ApplicationController
   end
 
   def show
-    @url&.click_logs&.create
-    redirect_to @url.utm_url, allow_other_host: true
+    find_shortener
+    @url_short.click_logs.create if @url_short
+    redirect_to @url_short.utm_url, allow_other_host: true
   end
 
   def edit; end
@@ -56,6 +57,10 @@ class UrlsController < ApplicationController
 
   def find_url
     @url = Url.find(params[:id])
+  end
+
+  def find_shortener
+    @url_short = Url.find_by(shortener: params[:id])
   end
 
   def campaign_params
