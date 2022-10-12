@@ -13,6 +13,7 @@ class Url < ApplicationRecord
   after_create :encode_id
 
   default_scope { where(deleted_at: nil) }
+  default_scope { order(created_at: :desc) }
 
   private
 

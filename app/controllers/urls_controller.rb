@@ -22,7 +22,7 @@ class UrlsController < ApplicationController
   end
 
   def show
-    find_shortener
+    @url_short = Url.find_by(shortener: params[:id])
     @url_short.click_logs.create if @url_short
     redirect_to @url_short.utm_url, allow_other_host: true
   end
@@ -59,10 +59,6 @@ class UrlsController < ApplicationController
     @url = Url.find(params[:id])
   end
 
-  def find_shortener
-    @url_short = Url.find_by(shortener: params[:id])
-  end
-
   def campaign_params
     params.require(:campaign).permit(:source, :medium, :name, :term, :content)
   end
@@ -78,7 +74,7 @@ class UrlsController < ApplicationController
 
     uri = URI.parse(@url[:page])
     new_query_ary = URI.decode_www_form(utm)
-    uri.query = URI.encode_www_form(new_query_ary)
+    uri.query = URI.encode_www_form(new_query_ary) if utm.size > 0
 
     @url[:utm_url] = uri
   end
