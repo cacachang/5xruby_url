@@ -1,4 +1,5 @@
-<h1 class="text-3xl font-bold text-center mb-16 mt-16">Welcome to Pointer</h1>
+<h1 class="mt-16 mb-16 text-3xl font-bold text-center">Welcome to Pointer</h1>
+<% console %>
 
 <div class="flex space-x-96">
   <%= link_to '新增短網址', new_url_path, class: "w-32 px-4 py-3 font-medium bg-red-200 rounded flex items-center cursor-pointer hover:bg-red-300 focus:ring-4 ring-0 focus:ring-red-100 mb-6 ml-2" %>
@@ -16,7 +17,7 @@
 </div>
 
 <div id="search">
-  <table class="border ml-2 mr-2">
+  <table class="ml-2 mr-2 border">
     <thead>
       <tr>
         <td class="w-3/12 p-2 text-center">短網址</td>
@@ -29,10 +30,10 @@
     </thead>
     <tbody>
       <% @search.each do |url| %>
-        <tr class="border text-center">
+        <tr class="text-center border">
           <td data-controller="copy-url" class="p-2">
             <%= link_to "#{@env}/reurl/#{url.shortener}", url_path(url.shortener), target: "_blank", data: { target: "copy-url.page" }, class: "block mb-6" %>
-            <button data-action="click->copy-url#copyToClipboard" class="w-18 px-4 py-3 font-medium bg-red-200 text-neutal-900 rounded flex items-center cursor-pointer hover:bg-red-300 focus:ring-4 ring-0 focus:ring-red-100 m-auto">複製</button>
+            <button data-action="click->copy-url#copyToClipboard" class="flex items-center px-4 py-3 m-auto font-medium bg-red-200 rounded cursor-pointer w-18 text-neutal-900 hover:bg-red-300 focus:ring-4 ring-0 focus:ring-red-100">複製</button>
           </td>
           <td class="p-2"><%= url.utm_url %></td>
           <td class="p-2"><%= link_to '編輯', edit_url_path(url.id), class: "w-16 px-4 py-3 font-medium bg-red-200 rounded flex items-center cursor-pointer hover:bg-red-300 focus:ring-4 ring-0 focus:ring-red-100"%></td>
